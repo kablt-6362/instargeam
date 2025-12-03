@@ -4,6 +4,8 @@ import com.example.instagram.dto.request.SignUpRequest;
 import com.example.instagram.dto.response.ProfileResponse;
 import com.example.instagram.entity.Role;
 import com.example.instagram.entity.User;
+import com.example.instagram.repository.FollowRepository;
+import com.example.instagram.repository.PostRepository;
 import com.example.instagram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +19,11 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+//    private final PostService postService;
+//    private final FollowService followService;
+    private final FollowRepository followRepository;
+    private final PostRepository postRepository;
+
 
     @Override
     @Transactional
@@ -46,7 +53,12 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUsername(username)
                 .orElseThrow();
 
-        return ProfileResponse.from(user);
+        long postsCount = postRepository.countByUserId(user.getId());
+        long followerCount = followRepository.countByFollowerId(user.getId());
+        long followingCount = followRepository.countByFollowingId(user.getId());
+
+
+        return ProfileResponse.from(user,postsCount,followerCount,followingCount);
 
     }
 
