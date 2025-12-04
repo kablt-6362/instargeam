@@ -35,6 +35,10 @@ public class User extends BaseEntity{
     @Column(length = 20)
     private String name;
 
+    // 사용자의 이미지를 저장하는 공간(로컬 사용할 예정)
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
     @Builder
     public User(String username, String password, String email, String name, Role role, String bio) {
         this.username = username;
@@ -49,5 +53,7 @@ public class User extends BaseEntity{
         this.name=name;
         this.bio=bio;
     }
+
+
 
 }
