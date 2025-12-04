@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
-        // 파일취이 절대경로화
+        // 파일위치 절대경로화
         String uploadPath = Paths.get(uploadDir).toAbsolutePath().toUri().toString();
 
         // 어떤파일이 어떤 폴더에 생성할지 설정
