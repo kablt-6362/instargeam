@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -54,6 +55,9 @@ public class User extends BaseEntity{
         this.bio=bio;
     }
 
+    public void updateProfileImage(String profileImageUrl){
+        this.profileImageUrl=profileImageUrl;
+    }
 
 
 }

@@ -14,6 +14,7 @@ public class ProfileResponse {
     private String username;
     private String bio;
     private String name;
+    private String profileImageUrl;
 
     // 통계
     private Long postCount;
@@ -27,6 +28,7 @@ public class ProfileResponse {
                 .username(user.getUsername())
                 .bio(user.getBio())
                 .name(user.getName())
+                .profileImageUrl(user.getProfileImageUrl())
                 .postCount(0L)
                 .followerCount(0L)
                 .followingCount(0L)
@@ -41,6 +43,7 @@ public class ProfileResponse {
                 .username(user.getUsername())
                 .bio(user.getBio())
                 .name(user.getName())
+                .profileImageUrl(user.getProfileImageUrl())
                 .postCount(postCount)
                 .followerCount(followerCount)
                 .followingCount(followingCount)

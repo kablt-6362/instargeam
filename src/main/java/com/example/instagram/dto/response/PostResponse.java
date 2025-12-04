@@ -14,6 +14,7 @@ public class PostResponse {
     private String content;
     private LocalDateTime createdAt;
     private String imageUrl;
+    private String profileImageUrl;
 
     private Long userId;
     private String username;
@@ -27,6 +28,7 @@ public class PostResponse {
                 .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                  .imageUrl(post.getImageUrl())
+                 .profileImageUrl(post.getUser().getProfileImageUrl())
                 .userId(post.getUser().getId())
                 .username(post.getUser().getUsername())
                  .commentCount(0)
@@ -39,6 +41,7 @@ public class PostResponse {
                 .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                  .imageUrl(post.getImageUrl())
+                 .profileImageUrl(post.getUser().getProfileImageUrl())
                 .userId(post.getUser().getId())
                 .username(post.getUser().getUsername())
                  .commentCount(commentCount)
