@@ -95,7 +95,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserResponse> searchUsers(String keyword){
-        return userRepository.searchByKeyword(keyword);
+        return userRepository.searchByKeyword(keyword).stream()
+                .map(UserResponse::from)
+                .toList()
+                ;
     }
 
 }
