@@ -6,6 +6,8 @@ import com.example.instagram.dto.response.ProfileResponse;
 import com.example.instagram.dto.response.UserResponse;
 import com.example.instagram.entity.Role;
 import com.example.instagram.entity.User;
+import com.example.instagram.exception.BusinessException;
+import com.example.instagram.exception.ErrorCode;
 import com.example.instagram.repository.FollowRepository;
 import com.example.instagram.repository.PostRepository;
 import com.example.instagram.repository.UserRepository;
@@ -49,13 +51,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findById(Long userId){
-        return userRepository.findById(userId).orElseThrow();
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
     }
 
     @Override
     public ProfileResponse getProfile(String username){
         User user = userRepository.findByUsername(username)
-                .orElseThrow();
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         long postsCount = postRepository.countByUserId(user.getId());
         long followerCount = followRepository.countByFollowingId(user.getId());
