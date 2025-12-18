@@ -1,6 +1,6 @@
 package com.example.instagram.repository;
 
-import com.example.instagram.dto.response.CommentResponse;
+
 import com.example.instagram.entity.Comment;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
