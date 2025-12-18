@@ -111,15 +111,15 @@ public class PostServiceImpl implements PostService {
 
         Slice<Post> posts = postRepository.findFeedPostsByUserIds(followingIds,pageable);
 
-        List<PostResponse> content = posts.getContent().stream()
+        List<PostResponse> postResponses = posts.getContent().stream()
                 .map(post -> {
                     long likeCount = likeRepository.countByPostId(post.getId());
-                    long commnetCount = commentRepository.countByPostId(post.getId());
-                    return PostResponse.from(post, commnetCount, likeCount);
+                    long commentCount = commentRepository.countByPostId(post.getId());
+                    return PostResponse.from(post, commentCount, likeCount);
                 })
                 .toList();
 
-        return new SliceImpl<>(content, pageable, posts.hasNext());
+        return new SliceImpl<>(postResponses, pageable, posts.hasNext());
 
     };
 
@@ -127,7 +127,7 @@ public class PostServiceImpl implements PostService {
     public Slice<PostResponse> getAllPostsPaging(Pageable pageable){
         Slice<Post> posts = postRepository.findAllWithUserPaging(pageable);
 
-        List<PostResponse> content = posts.getContent().stream()
+        List<PostResponse> postResponses = posts.getContent().stream()
                 .map(post -> {
                     long likeCount = likeRepository.countByPostId(post.getId());
                     long commentCount = commentRepository.countByPostId(post.getId());
@@ -136,13 +136,13 @@ public class PostServiceImpl implements PostService {
                 })
                 .toList();
 
-            return new SliceImpl<>(content, pageable, posts.hasNext());
+            return new SliceImpl<>(postResponses, pageable, posts.hasNext());
     }
 
     @Override
     public Slice<PostResponse> searchPosts(String keyword,Pageable pageable){
         Slice<Post> posts = postRepository.searchByKeyword(keyword,pageable);
-        List<PostResponse> content = posts.getContent().stream()
+        List<PostResponse> postResponses = posts.getContent().stream()
                 .map(post ->{
                     long likeCount = likeRepository.countByPostId(post.getId());
                     long commentCount = commentRepository.countByPostId(post.getId());
@@ -151,7 +151,7 @@ public class PostServiceImpl implements PostService {
                 .toList();
 
         // List형태를 Slice 형태로 바꾸는 법
-        return new SliceImpl<>(content, pageable, posts.hasNext());
+        return new SliceImpl<>(postResponses, pageable, posts.hasNext());
     }
 
 }
